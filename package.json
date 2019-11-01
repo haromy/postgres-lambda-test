@@ -1,7 +1,14 @@
 {
   "name": "aws-node-restapi-mongodb",
   "version": "1.0.0",
-  "description": "Serverless REST API with MongoDB using Mongoose and Bluebird",
+  "description": "Serverless REST API with POSTGRES",
+  "scripts": {
+    "start": "sls offline start",
+    "clean": "esw --color",
+    "deploy-dev": "sls deploy --aws-profile example -v --stage dev",
+    "deploy-staging": "sls deploy --aws-profile example -v --stage staging",
+    "deploy-live": "sls deploy --aws-profile example -v --stage live"
+  },
   "main": "handler.js",
   "dependencies": {
     "bluebird": "^3.5.0",
