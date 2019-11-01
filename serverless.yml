@@ -1,0 +1,61 @@
+# Services Name
+service: test
+
+# Serverless plugins
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  runtime: nodejs10.x
+  profile: default
+  memorySize: 256
+  timeout: 30
+  environment: ${file(./env.json)}
+  region: ${file(./env.json):AWS_LAMBDA_REGION}
+  role: ${file(./env.json):AWS_LAMBDA_EXECUTION_ROLE}
+  # if using vpc, please set in env.json
+  # if not, you can comment VPC section
+  # vpc:
+  #   securityGroupIds:
+  #     - ${file(./env.json):AWS_VPC_SECURITY_GROUP_ID_1}
+  #   subnetIds:
+  #     - ${file(./env.json):AWS_VPC_SUBNET_ID_1}
+  #     - ${file(./env.json):AWS_VPC_SUBNET_ID_2}
+  # if shared api gateway, please set in env.json
+  # if not, you can comment apiGateway section
+  # apiGateway:
+  #   restApiId: ${file(./env.json):AWS_APIGW_ID}
+  #   restApiRootResourceId: ${file(./env.json):AWS_APIGW_RESOURCES_ID}
+
+functions:
+  commentGet:
+    handler: handler.commentGet
+    events:
+      - http:
+          path: /{org}/comment
+          method: get
+          cors: true
+  commentDelete:
+    handler: handler.commentDelete
+    events:
+      - http:
+          path: /{org}/comment
+          method: delete
+          cors: true
+  commentCreate:
+    handler: handler.commentCreate
+    events:
+      - http:
+          path: /{org}/comment
+          method: post
+          cors: true
+  memberGet:
+    handler: handler.memberGet
+    events:
+      - http:
+          path: /{org}/members
+          method: get
+          cors: true
+
