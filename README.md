@@ -1,6 +1,12 @@
 # information :
 this is example for serverless framework, using postgres and deploy to multiple lambda for each function
 
+
+## example db
+example db for postgres on root directory with name `example.sql`
+you can restore to your database.
+
+
 ## running local
 
 1. create `env.json`
